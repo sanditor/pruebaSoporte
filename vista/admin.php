@@ -2,7 +2,7 @@
 ini_set('error_reporting', E_ALL);
 //echo "adsf";exit;
 session_start();
-	if($_SESSION["tipo"]=="1") 
+	if($_SESSION['tipo_usuario']=="1") 
 	{
 ?>
 <!DOCTYPE html>
@@ -59,14 +59,14 @@ session_start();
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span><?php echo $_SESSION["nombre"]; ?> <i class="caret"></i></span>
+                                <span><?php echo $_SESSION['nombres_usuario']; ?> <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-udc">
                                     <img src="../estilos/img/avatar3.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        <?php echo $_SESSION["nombre"]; ?>  - Administrador
+                                        <?php echo $_SESSION['nombres_usuario']; ?>  - Administrador
                                         <small>Usuario(a) desde <?php echo $newDate = date("M-Y", strtotime($_SESSION["fecha_registro"])); ?></small>
                                     </p>
                                 </li>
@@ -96,7 +96,7 @@ session_start();
                             <img src="../estilos/img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hola, <?php echo $_SESSION["nombre"]; ?></p>
+                            <p>Hola, <?php echo $_SESSION['nombres_usuario']; ?></p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
@@ -216,7 +216,7 @@ session_start();
     $_SESSION["ultimoAcceso"] = $ahora; 
              }
 }
-elseif($_SESSION["tipo"]!="1") {
-		header("Location: ../index.php");
+elseif($_SESSION['tipo_usuario']!="1") {
+		header("Location:../index.php");
 	}
 ?>

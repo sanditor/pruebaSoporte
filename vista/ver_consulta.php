@@ -1,9 +1,10 @@
 <?php
 session_start();
-	if($_SESSION["tipo"]=="1") 
+	if($_SESSION["tipo_usuario"]=="1") 
 	{
-$fecha_in=$_REQUEST[valor1];	
-$fecha_fin=$_REQUEST[valor2];		
+$fecha_in=$_REQUEST['valor1'];
+$fecha_fin=$_REQUEST['valor2'];
+
 
 require_once("../controlador/contro_clase_consulta.php");	  
 $pregunta_l=new controla_clase_pregunta();
@@ -21,7 +22,7 @@ $pregunta_l->val_clase_pregunta_reporte($fecha_in,$fecha_fin);
     $_SESSION["ultimoAcceso"] = $ahora; 
              } 
 }
-elseif($_SESSION["tipo"]!="1") {
+elseif($_SESSION["tipo_usuario"]!="1") {
 		header("Location: ../index.php");
 	} 
 ?>

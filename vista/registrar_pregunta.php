@@ -1,6 +1,6 @@
 <?php
 session_start();
-	if($_SESSION["tipo"]=="2") 
+	if($_SESSION["tipo_usuario"]=="2") 
 	{
 ?>
 <!DOCTYPE html>
@@ -55,14 +55,14 @@ session_start();
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span><?php echo $_SESSION["nombre"]; ?> <i class="caret"></i></span>
+                                <span><?php echo $_SESSION["nombres_usuario"]; ?> <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-udc">
                                     <img src="../estilos/img/avatar3.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        <?php echo $_SESSION["nombre"]; ?>  - Estudiante/Monitor
+                                        <?php echo $_SESSION["nombres_usuario"]; ?>  - Estudiante/Monitor
                                         <small>Usuario(a) desde <?php echo $newDate = date("M-Y", strtotime($_SESSION["fecha_registro"])); ?></small>
                                     </p>
                                 </li>
@@ -331,7 +331,7 @@ $("a[data-toggle=modal]").click(function()
     $_SESSION["ultimoAcceso"] = $ahora; 
              } 
 }
-elseif($_SESSION["tipo"]!="1") {
+elseif($_SESSION["tipo_usuario"]!="1") {
 		header("Location: ../index.php");
 	} 
 ?>

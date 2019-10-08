@@ -210,6 +210,7 @@ INSERT INTO `usuario` (`id_usuario`, `codigo_usuario`, `nombres_usuario`, `apell
 	(2, 200, 'Julio Cesar', 'Deavila Pertuz', '202cb962ac59075b964b07152d234b70', 2, '2014-04-08', 'Habilitado'),
 	(3, 201, 'Aury Pautt', 'Quiñonez', '757b505cfd34c64c85ca5b5690ee5293', 2, '2014-08-27', 'Habilitado'),
 	(4, 202, 'Hector ', 'Pertuz Patron', '854d6fae5ee42911677c739ee1734486', 2, '2014-08-07', 'Habilitado');
+  (5, 500, 'Sandor ', 'Luque Farfan', 'e10adc3949ba59abbe56e057f20f883e', 1, '2019-10-07', 'Habilitado');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

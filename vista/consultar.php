@@ -1,10 +1,10 @@
 <?php
 session_start();
-	if($_SESSION["tipo"]=="1") 
-	{
-?>
-<!DOCTYPE html>
-<html>
+if ($_SESSION['tipo_usuario'] == "1") {
+    ?>
+    <!DOCTYPE html>
+    <html>
+
     <head>
         <meta charset="UTF-8">
         <title>Administrador | Consultar</title>
@@ -33,6 +33,7 @@ session_start();
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
+
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
@@ -55,14 +56,14 @@ session_start();
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span><?php echo $_SESSION["nombre"]; ?> <i class="caret"></i></span>
+                                <span><?php echo $_SESSION['nombres_usuario']; ?> <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-udc">
                                     <img src="../estilos/img/avatar3.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        <?php echo $_SESSION["nombre"]; ?>  - Administrador
+                                        <?php echo $_SESSION["nombres_usuario"]; ?> - Administrador
                                         <small>Usuario(a) desde <?php echo $newDate = date("M-Y", strtotime($_SESSION["fecha_registro"])); ?></small>
                                     </p>
                                 </li>
@@ -92,7 +93,7 @@ session_start();
                             <img src="../estilos/img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hola, <?php echo $_SESSION["nombre"]; ?></p>
+                            <p>Hola, <?php echo $_SESSION['nombres_usuario']; ?></p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
@@ -100,7 +101,7 @@ session_start();
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                            <input type="text" name="q" class="form-control" placeholder="Search..." />
                             <span class="input-group-btn">
                                 <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                             </span>
@@ -120,17 +121,18 @@ session_start();
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                 <li class="active">
-                            <a href="consultar.php">
-                                <i class="fa fa-angle-double-right"></i> <span>Consulta</span>
-                            </a>
-                        </li>
+                                <li class="active">
+                                    <a href="consultar.php">
+                                        <i class="fa fa-angle-double-right"></i> <span>Consulta</span>
+                                    </a>
+                                </li>
                             </ul>
-                        </li><li>
+                        </li>
+                        <li>
                             <a href="../controlador/cerrar.php">
                                 <i class="fa  fa-sign-out"></i> <span>Cerrar Sesión</span>
                             </a>
-                        </li> 
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -153,53 +155,56 @@ session_start();
                 <!-- Main content -->
                 <section class="content">
 
-                <section class="col-lg-12 connectedSortable"> 
-                            <!-- Box (with bar chart) -->
-                            <div class="box box-primary" id="loading-example">
-                                <div class="box-header">
-                                    <!-- tools box -->
-                                    <div class="pull-right box-tools">
-                                        <button class="btn btn-primary btn-sm" data-widget='collapse' data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-primary btn-sm" data-widget='remove' data-toggle="tooltip" title="Cerrar"><i class="fa fa-times"></i></button>
-                                    </div><!-- /. tools -->
-                                    <i class="fa fa-cloud"></i>
+                    <section class="col-lg-12 connectedSortable">
+                        <!-- Box (with bar chart) -->
+                        <div class="box box-primary" id="loading-example">
+                            <div class="box-header">
+                                <!-- tools box -->
+                                <div class="pull-right box-tools">
+                                    <button class="btn btn-primary btn-sm" data-widget='collapse' data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-primary btn-sm" data-widget='remove' data-toggle="tooltip" title="Cerrar"><i class="fa fa-times"></i></button>
+                                </div><!-- /. tools -->
+                                <i class="fa fa-cloud"></i>
 
-                                    <h3 class="box-title">Consulta</h3>
-                                </div><!-- /.box-header -->
-                              <div class="box-body padding"> 
-                                  
-                                  <div class="modal-body">
-							<input type="hidden" id="cc_est" name="cc_est" value="<?php echo $_SESSION["codigo"]; ?>"/>
-                            <div class="box-body">
-							  <div class="form-group">
-                                        <div class="col-xs-3">
-									<label>Fecha Inicial</label>
-                                    	    <div class="input-group">
-                                            <input type="text" class="form-control" id="fecha_ini_" name="fecha_ini" data-date-format="yyyy-mm-dd" data-required="true">
-                                           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>  
-                                        </div>                                        </div>
-                                     <div class="col-xs-3">
-									<label>Fecha Final</label>
-                                    	    <div class="input-group">
-                                            <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" data-date-format="yyyy-mm-dd" data-required="true">
-                                           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>  
-                                        </div>                                         </div>
-                                    </div>	                            
+                                <h3 class="box-title">Consulta</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body padding">
+
+                                <div class="modal-body">
+                                    <input type="hidden" id="cc_est" name="cc_est" value="<?php echo $_SESSION['codigo_usuario']; ?>" />
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <div class="col-xs-3">
+                                                <label>Fecha Inicial</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="fecha_ini" name="fecha_ini" data-date-format="yyyy-mm-dd" data-required="true">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <label>Fecha Final</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" data-date-format="yyyy-mm-dd" data-required="true">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <br><br>
-                                      <div class="box-footer">
+                                    <div class="box-footer">
                                         <button type="submit" name="boton" id="boton" class="btn btn-primary">Consultar</button>
-                                  </div>
-                                  <br><br>
-                                   <div id="capa">Elija dos fechas para observar el reporte</div>
-    				<br>                         
+                                    </div>
+                                    <br><br>
+                                    <div id="capa">Elija dos fechas para observar el reporte</div>
+                                    <br>
                                 </div><!-- /.box-body -->
-                                <div class="box-footer"><!-- /.row -->
+                                <div class="box-footer">
+                                    <!-- /.row -->
                                 </div><!-- /.box-footer -->
-                            </div><!-- /.box --> 
-       
+                            </div><!-- /.box -->
 
-                </section><!-- /.content -->
+
+                    </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
@@ -218,51 +223,53 @@ session_start();
         <!-- File Input -->
         <script src="../estilos/js/bootstrap.file-input.js" type="text/javascript"></script>
         <!-- select or dropdown enhancer -->
-		<script src="../estilos/js/jquery.chosen.min.js"></script>
+        <script src="../estilos/js/jquery.chosen.min.js"></script>
         <!-- Parsley-->
-		<script src="../estilos/js/parsley.js"></script>
+        <script src="../estilos/js/parsley.js"></script>
         <!-- NotifIt -->
-    	<script type="text/javascript" src="../estilos/js/notifIt.js"></script>
+        <script type="text/javascript" src="../estilos/js/notifIt.js"></script>
         <!-- Confirmacion -->
-		<script src="../estilos/js/jquery.confirm.js"></script> 
+        <script src="../estilos/js/jquery.confirm.js"></script>
         <!-- AdminLTE App -->
-        <script src="../estilos/js/AdminLTE/app.js" type="text/javascript"></script>     
-<script type="text/javascript">
-			$('#fecha_fin_').datepicker();
-			$('#fecha_ini').datepicker();
-			</script>
-                   <script type="text/javascript">
+        <script src="../estilos/js/AdminLTE/app.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $('#fecha_fin').datepicker();
+            $('#fecha_ini').datepicker();
+        </script>
+        <script type="text/javascript">
             $(document).ready(function() {
                 $("#boton").click(function(event) {
-					var primera = $('#fecha_ini').val();
-					var segunda = $('#fecha_fin').val();
-                    $("#capa").load("../vista/ver_consulta.php",{valor1: primera, valor2: segunda }, function(response, status, xhr) {
-                          if (status == "error") {
+                    var primera = $('#fecha_ini').val();
+                    var segunda = $('#fecha_fin').val();
+                    $("#capa").load("../vista/ver_consulta.php", {
+                        valor1: primera,
+                        valor2: segunda
+                    }, function(response, status, xhr) {
+                        if (status == "error") {
                             var msg = "Error!, algo ha sucedido: ";
                             $("#capa").html(msg + xhr.status + " " + xhr.statusText);
-                          }
-                        });
+                        }
+                    });
                 });
-            });            
+            });
         </script>
     </body>
-</html>
-<?
-	 $Listado="";  
-	 $_SESSION["suceso"] = $Listado;   
-	 $_SESSION["evento"] = "success";
-	 $fechaGuardada = $_SESSION["ultimoAcceso"]; 
-     $ahora = date("Y-n-j H:i:s");
-     $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));	
- if($tiempo_transcurrido >= 2200) {	
-	    session_destroy();
-        header("Location: ../controlador/cerrar.php"); 
-	     }	
-	    else { 
-    $_SESSION["ultimoAcceso"] = $ahora; 
-             } 
+
+    </html>
+<?php
+    $Listado = "";
+    $_SESSION["suceso"] = $Listado;
+    $_SESSION["evento"] = "success";
+    $fechaGuardada = $_SESSION["ultimoAcceso"];
+    $ahora = date("Y-n-j H:i:s");
+    $tiempo_transcurrido = (strtotime($ahora) - strtotime($fechaGuardada));
+    if ($tiempo_transcurrido >= 2200) {
+        session_destroy();
+        header("Location: ../controlador/cerrar.php");
+    } else {
+        $_SESSION["ultimoAcceso"] = $ahora;
+    }
+} elseif ($_SESSION['tipo_usuario'] != "1") {
+    header("Location: ../index.php");
 }
-elseif($_SESSION["tipo"]!="1") {
-		header("Location: ../index.php");
-	} 
 ?>
