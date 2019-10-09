@@ -1,6 +1,6 @@
 <?php
 session_start();
-	if($_SESSION["tipo"]=="2") 
+	if($_SESSION["tipo_usuario"]=="2") 
 	{
 $id_preg=$_REQUEST[id_pregunta];		
 include_once("../controlador/contro_clase_pregunta.php");
@@ -97,7 +97,7 @@ $respuesta_sele->valores_clase_respuesta($pregunta->resp_ele);
     $_SESSION["ultimoAcceso"] = $ahora; 
              } 
 }
-elseif($_SESSION["tipo"]!="5") {
+elseif($_SESSION["tipo_usuario"]!="5") {
 		header("Location: ../index.php");
 	} 
 ?>

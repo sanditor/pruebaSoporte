@@ -284,7 +284,7 @@ $("button[data-toggle=modal]").click(function()
     $_SESSION["ultimoAcceso"] = $ahora; 
              } 
 }
-elseif($_SESSION["tipo"]!="1") {
+elseif($_SESSION["tipo_usuario"]!="1") {
 		header("Location: ../index.php");
 	} 
 ?>

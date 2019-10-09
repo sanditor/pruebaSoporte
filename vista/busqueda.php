@@ -101,7 +101,7 @@ if ($_SESSION['tipo_usuario'] == "1") {
                     <!-- search form -->
                     <form action="busqueda.php" method="POST" class="sidebar-form">
                         <div class="input-group">
-                            <input type="text" name="buscar" class="form-control" placeholder="Escriba nombre Art'iculo" />
+                            <input type="text" name="buscar" class="form-control" placeholder="Search..." />
                             <span class="input-group-btn">
                                 <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                             </span>

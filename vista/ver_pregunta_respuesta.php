@@ -1,6 +1,6 @@
 <?php
 session_start();
-	if($_SESSION["tipo"]=="2") 
+	if($_SESSION["tipo_usuario"]=="2") 
 	{
 $id_preg=$_REQUEST[id_pregunta];		
 include_once("../controlador/contro_clase_pregunta.php");
@@ -76,7 +76,8 @@ $respuesta->valores_clase_respuesta_monitor($id_preg,$_SESSION["codigo"]);
                             </div>  
                             <script>
 							$('#estrellas').chosen();
-							</script>                  
+                            </script> 
+                 
 <?
 	 $fechaGuardada = $_SESSION["ultimoAcceso"]; 
      $ahora = date("Y-n-j H:i:s");
@@ -89,7 +90,7 @@ $respuesta->valores_clase_respuesta_monitor($id_preg,$_SESSION["codigo"]);
     $_SESSION["ultimoAcceso"] = $ahora; 
              } 
 }
-elseif($_SESSION["tipo"]!="5") {
+elseif($_SESSION["tipo_usuario"]!="5") {
 		header("Location: ../index.php");
 	} 
 ?>
