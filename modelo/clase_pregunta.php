@@ -80,7 +80,7 @@ $row["respuestas"],
 function listado_reporte($fecha_ini,$fecha_fin){	//Listado Reporte
 $this->conexion = parent::conectar();
 	$ConsultaSQL_lista=$this->conexion->prepare("SELECT
-	CONCAT(nombres_usuario,' ',apellidos_usuario AS estudiante,IFNULL(SUM(pregunta_estrellas.n_estrellas),0) AS total_estrellas
+	CONCAT(nombres_usuario,' ',apellidos_usuario) AS estudiante, IFNULL(SUM(pregunta_estrellas.n_estrellas),0) AS total_estrellas
 FROM
 	pregunta
 LEFT JOIN pregunta_estrellas

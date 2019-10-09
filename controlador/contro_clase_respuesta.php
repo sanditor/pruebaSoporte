@@ -1,6 +1,6 @@
 <?php
 session_start();
-	if ($_SESSION["tipo"]=="2") 
+	if ($_SESSION["tipo_usuario"]=="2") 
 	{	
 include_once("../modelo/clase_respuesta.php");
 	class controla_clase_respuesta{ 

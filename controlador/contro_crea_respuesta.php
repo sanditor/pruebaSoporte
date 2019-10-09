@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../modelo/crear_respuesta_modelo.php");
-	if ($_SESSION["tipo"]=="2") 
+	if ($_SESSION["tipo_usuario"]=="2") 
 	{
 class crea_respuesta{
 		function creando_respuesta(){	

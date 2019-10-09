@@ -8,8 +8,10 @@ abstract class configuracion {
 		$servidor = "localhost"; //servidor como localhost o 127.0.0.1 usar este ultimo cuando el puerto sea diferente
 		$puerto = "3306";
 		$basedatos = "dbtest1"; 
-		$usuario = "usdbtest1";
-		$pass = "LsCMH2Hw";//nombre de la base de datos
+		/* $usuario = "usdbtest1";
+		$pass = "LsCMH2Hw";//nombre de la base de datos */
+		$usuario = "root";
+		$pass = "";//nombre de la base de datos
 
 		try{
 			return $this->datahost = new PDO (
@@ -28,8 +30,8 @@ abstract class configuracion {
 
 	private $host = "localhost";
 	private $dbname = "dbtest1";
-	private $user = "usdbtest1";
-	private $password = "LsCMH2Hw";
+	private $user = "root";
+	private $password = "";
 	private $conexion = null;
 
 	public function conectar(){

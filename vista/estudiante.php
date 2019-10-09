@@ -1,6 +1,6 @@
 <?php
 session_start();
-	if($_SESSION["tipo"]=="2") 
+	if($_SESSION["tipo_usuario"]=="2") 
 	{
 ?>
 <!DOCTYPE html>
@@ -100,7 +100,7 @@ session_start();
                         </div>
                     </div>
                     <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
+                    <form action="busqueda.php" method="POST" class="sidebar-form">
                         <div class="input-group">
                             <input type="text" name="q" class="form-control" placeholder="Search..."/>
                             <span class="input-group-btn">

@@ -1,15 +1,13 @@
 <?php
-ini_set('error_reporting', E_ALL);
-//echo "adsf";exit;
 session_start();
-	if($_SESSION['tipo_usuario']=="1") 
-	{
-?>
-<!DOCTYPE html>
-<html>
+if ($_SESSION['tipo_usuario'] == "1") {
+    ?>
+    <!DOCTYPE html>
+    <html>
+
     <head>
         <meta charset="UTF-8">
-        <title>Administrador | Inicio</title>
+        <title>Administrador | Consultar</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="../estilos/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -17,16 +15,14 @@ session_start();
         <link href="../estilos/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
         <link href="../estilos/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        <!-- Morris chart -->
-        <link href="../estilos/css/morris/morris.css" rel="stylesheet" type="text/css" />
-        <!-- jvectormap -->
-        <link href="../estilos/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-        <!-- fullCalendar -->
-        <link href="../estilos/css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
-        <!-- Daterange picker -->
-        <link href="../estilos/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link href="../estilos/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <!-- daterange picker -->
+        <link href="../estilos/css/datepicker.css" rel="stylesheet" type="text/css" />
+        <!-- DATA TABLES -->
+        <link href="../estilos/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+        <!-- Choseen -->
+        <link href='../estilos/css/chosen.css' rel='stylesheet'>
+        <!-- NotifIt -->
+        <link href='../estilos/css/notifIt.css' rel='stylesheet'>
         <!-- Theme style -->
         <link href="../estilos/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
@@ -37,6 +33,7 @@ session_start();
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
+
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
@@ -66,7 +63,7 @@ session_start();
                                 <li class="user-header bg-udc">
                                     <img src="../estilos/img/avatar3.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        <?php echo $_SESSION['nombres_usuario']; ?>  - Administrador
+                                        <?php echo $_SESSION["nombres_usuario"]; ?> - Administrador
                                         <small>Usuario(a) desde <?php echo $newDate = date("M-Y", strtotime($_SESSION["fecha_registro"])); ?></small>
                                     </p>
                                 </li>
@@ -104,9 +101,9 @@ session_start();
                     <!-- search form -->
                     <form action="busqueda.php" method="POST" class="sidebar-form">
                         <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                            <input type="text" name="buscar" class="form-control" placeholder="Escriba nombre Art'iculo" />
                             <span class="input-group-btn">
-                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                                <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                             </span>
                         </div>
                     </form>
@@ -118,23 +115,24 @@ session_start();
                                 <i class="fa fa-dashboard"></i><span>Inicio</span>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-search"></i> <span>Reportes</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                 <li>
-                            <a href="../vista/consultar.php">
-                                <i class="fa fa-angle-double-right"></i> <span>Consulta</span>
-                            </a>
-                        </li>
+                                <li class="active">
+                                    <a href="consultar.php">
+                                        <i class="fa fa-angle-double-right"></i> <span>Consulta</span>
+                                    </a>
+                                </li>
                             </ul>
-                        </li><li>
+                        </li>
+                        <li>
                             <a href="../controlador/cerrar.php">
                                 <i class="fa  fa-sign-out"></i> <span>Cerrar Sesión</span>
                             </a>
-                        </li> 
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -157,66 +155,103 @@ session_start();
                 <!-- Main content -->
                 <section class="content">
 
-                    <!-- Small boxes (Stat box) -->
-                    <!-- /.row -->
-       
+                    <section class="col-lg-12 connectedSortable">
+                        <!-- Box (with bar chart) -->
+                        <div class="box box-primary" id="loading-example">
+                            <div class="box-header">
+                                <!-- tools box -->
+                                <div class="pull-right box-tools">
+                                    <button class="btn btn-primary btn-sm" data-widget='collapse' data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-primary btn-sm" data-widget='remove' data-toggle="tooltip" title="Cerrar"><i class="fa fa-times"></i></button>
+                                </div><!-- /. tools -->
+                                <i class="fa fa-cloud"></i>
 
-                </section><!-- /.content -->
+                                <h3 class="box-title">Informacion Usuario</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body padding">
+
+                                <div class="modal-body">
+                                    <div class="box-body">
+                                        <div class="container">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-6">
+                                                    <form action="#" method="POST">
+                                                        <input type="hidden" name="id" class="form-control" value="<?php echo $_SESSION['id_usuario'] ?>" />
+                                                        <div class="form-group">
+                                                            <label for="name">Nombres:</label>
+                                                            <input type="text" name="name" class="form-control" value="<?php echo $_SESSION['nombres_usuario'] ?>"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="surname">Apellidos:</label>
+                                                            <input type="text" name="surname" class="form-control" value="<?php echo $_SESSION['apellidos_usuario'] ?>" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="date_register">Fecha_Registro:</label>
+                                                            <input type="date" name="date_register" class="form-control" value="<?php echo $_SESSION['fecha_registro'] ?>" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="date_register">Estado_Usuario:</label>
+                                                            <input type="text" name="estado" class="form-control" value="<?php echo $_SESSION['estado_usuario'] ?>" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type='submit' name='actualizar' id='guardar' class="btn btn-primary btn-block">Actualizar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+
+
+                    </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
         <!-- add new calendar event modal -->
 
 
-        <!-- jQuery 2.0.2 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <!-- jQuery UI 1.10.3 -->
-        <script src="../estilos/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <!-- jQuery 1.7.2 -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="../estilos/js/bootstrap.min.js" type="text/javascript"></script>
-        <!-- Morris.js charts -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="../estilos/js/plugins/morris/morris.min.js" type="text/javascript"></script>
-        <!-- Sparkline -->
-        <script src="../estilos/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-        <!-- jvectormap -->
-        <script src="../estilos/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-        <script src="../estilos/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-        <!-- fullCalendar -->
-        <script src="../estilos/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="../estilos/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
-        <!-- daterangepicker -->
-        <script src="../estilos/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <!-- Bootstrap WYSIHTML5 -->
-        <script src="../estilos/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-        <!-- iCheck -->
-        <script src="../estilos/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-
+        <!-- DATA TABES SCRIPT -->
+        <script src="../estilos/js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="../estilos/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+        <!-- date-range-picker -->
+        <script src="../estilos/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <!-- File Input -->
+        <script src="../estilos/js/bootstrap.file-input.js" type="text/javascript"></script>
+        <!-- select or dropdown enhancer -->
+        <script src="../estilos/js/jquery.chosen.min.js"></script>
+        <!-- Parsley-->
+        <script src="../estilos/js/parsley.js"></script>
+        <!-- NotifIt -->
+        <script type="text/javascript" src="../estilos/js/notifIt.js"></script>
+        <!-- Confirmacion -->
+        <script src="../estilos/js/jquery.confirm.js"></script>
         <!-- AdminLTE App -->
         <script src="../estilos/js/AdminLTE/app.js" type="text/javascript"></script>
-        
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="../estilos/js/AdminLTE/dashboard.js" type="text/javascript"></script>        
+        <script type="text/javascript">
 
+        </script>
     </body>
-</html>
+
+    </html>
 <?php
-	 $Listado="";  
-	 $_SESSION["suceso"] = $Listado;   
-	 $_SESSION["evento"] = "success";
-	 $fechaGuardada = $_SESSION["ultimoAcceso"]; 
-     $ahora = date("Y-n-j H:i:s");
-     $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));	
- if($tiempo_transcurrido >= 2200) {	
-	    session_destroy();
-        header("Location: ../controlador/cerrar.php"); 
-	     }	
-	    else { 
-    $_SESSION["ultimoAcceso"] = $ahora; 
-             }
+    $Listado = "";
+    $_SESSION["suceso"] = $Listado;
+    $_SESSION["evento"] = "success";
+    $fechaGuardada = $_SESSION["ultimoAcceso"];
+    $ahora = date("Y-n-j H:i:s");
+    $tiempo_transcurrido = (strtotime($ahora) - strtotime($fechaGuardada));
+    if ($tiempo_transcurrido >= 2200) {
+        session_destroy();
+        header("Location: ../controlador/cerrar.php");
+    } else {
+        $_SESSION["ultimoAcceso"] = $ahora;
+    }
+} elseif ($_SESSION['tipo_usuario'] != "1") {
+    header("Location: ../index.php");
 }
-elseif($_SESSION['tipo_usuario']!="1") {
-		header("Location:../index.php");
-	}
 ?>
