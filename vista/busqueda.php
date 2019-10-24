@@ -103,7 +103,7 @@ if ($_SESSION['tipo_usuario'] == "1") {
                         <div class="input-group">
                             <input type="text" name="buscar" class="form-control" placeholder="Search..." />
                             <span class="input-group-btn">
-                                <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                                <button type='submit' name="search" id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                             </span>
                         </div>
                     </form>
@@ -173,25 +173,35 @@ if ($_SESSION['tipo_usuario'] == "1") {
                                 <div class="modal-body">
                                     <div class="box-body">
                                         <?php
-                                            if ($_POST) {
+                                            if (isset($_POST['search'])) {
                                                 require_once('../modelo/conexion.php');
-                                                $conexion = conectar();
-                                                $buscar = $_POST['buscar'];
-                                                $consulta = "SELECT id, descripcion_articulo, Fecha_articulo FROM articulos WHERE articulo_titulo LIKE CONCAT('%', :art, '%')";
-                                                $stm = $conexion->prepare($consulta);
-                                                $resultado = $stm->execute(array(':art' => $buscar));
-                                                $filas = $stm->fetchAll(\PDO::FETCH_OBJ);
-                                                if (count($filas)) {
+                                                $objeto = new configuracion(); 
+                                                $conexion = $objeto -> conectar();                                              
+                                                $buscar = htmlentities($_POST['buscar']);
+                                                $sel_art = $conexion->prepare("SELECT * FROM articulos WHERE articulo_titulo LIKE concat('%', :buscar, '%') ");
+                                              
+                                                $sel_art->execute(array(
+                                                    ':buscar' => $buscar
+                                                ));                                                                                          
+                                                $res_arts = $sel_art->fetchAll(PDO::FETCH_ASSOC);                                               
+                                              /*   var_dump($res_arts);
+                                                die(); */
+                                                //cuantos resultados me arroja la consulta
+                                                $filas = $sel_art->rowCount();
+                                               
+                                                if ($filas > 0) {
 
-                                                    foreach ($filas as $fila) {
+                                                    foreach ($res_arts as $res_art) {
                                         ?>
                                                         <div class="card" style="width: 30rem;">
                                                             <div class="card-body">
-                                                                <h5 class="card-title"><?php echo $buscar ?></h5>
-                                                                <h6 class="card-subtitle mb-2 text-muted"><?php echo $fila->Fecha_articulo ?></h6>
-                                                                <p class="card-text"><?php echo $fila->descripcion_articulo ?></p>
+                                                                <a href="#"><h5 class="card-title" style="font-weight: bold;"><?= $res_art['articulo_titulo'] ?></h5></a>
+                                                                <h6 class="card-subtitle mb-2 text-muted"><?= $res_art['Fecha_articulo'] ?></h6>
+                                                                <p class="card-text"><?= $res_art['descripcion_articulo'] ?></p>
+                                                    </hr>
                                                             </div>
                                                         </div>
+                                                    
                                         <?php
                                                     }
                                                 } else {
